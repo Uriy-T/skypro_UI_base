@@ -11,14 +11,21 @@ class MyServer(BaseHTTPRequestHandler):
     """
 
     def do_GET(self):
-        self.send_response(200, "Success")
-        self.send_header("Content-type","text/html")
-        self.end_headers()
-        with open(CONTACTS_PAGE, 'r', encoding='utf-8') as file:
-            contact_page = file.read()
 
-        self.wfile.write(contact_page.encode('utf-8'))
+        try:
+            if self.path == '/contacts':
+                self.send_response(200, "Success")
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
+                with open(CONTACTS_PAGE, 'r', encoding='utf-8') as file:
+                    contact_page = file.read()
 
+                self.wfile.write(contact_page.encode('utf-8'))
+            else:
+                self.send_error(404, "Page nor found")
+
+        except FileNotFoundError:
+            self.send_error(500, "Internal server error")
 
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
