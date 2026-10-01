@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SkyPro front study</title>
+    <link href="css/bootstrap_css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="images/bootstrap-icons-1.13.1/bootstrap-icons.min.css" rel="stylesheet"/>
+    <link href="css/custom_css/custom_styles.css" rel="stylesheet"/>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 bg-black vh-100 p-3 d-flex flex-column">
+            <div class="d-flex align-items-center gap-2">
+                <img src="images/icons/logo.svg" style="width: 32px;">
+                <p class="text-white mb-0 main-font">Меню</p>
+            </div>
+            <hr class="hr-color opacity-100">
+            <div class="d-grid gap-2">
+                <button type="btn"
+                        class="btn btn-black text-white text-start d-inline-flex align-items-center gap-2 menu-btn">
+                    <img src="images/icons/home.svg" class="btn-icon me-1">
+                    Главная
+                </button>
+                <button type="btn"
+                        class="btn btn-black text-white text-start d-inline-flex align-items-center gap-2 menu-btn">
+                    <img src="images/icons/categories.svg" class="btn-icon me-1">
+                    Категории
+                </button>
+                <button type="btn"
+                        class="btn btn-black text-white text-start d-inline-flex align-items-center gap-2 menu-btn">
+                    <img src="images/icons/orders.svg" class="btn-icon me-1">
+                    Заказы
+                </button>
+                <button type="btn"
+                        class="btn btn-black text-white text-start d-inline-flex align-items-center gap-2 menu-btn">
+                    <img src="images/icons/contacts.svg" class="btn-icon me-1">
+                    Контакты
+                </button>
+            </div>
+            <hr class="hr-color opacity-100 mt-auto">
+            <div class="dropdown">
+                <button class="btn text-white text-start d-inline-flex align-items-center gap-2 w-100 menu-btn"
+                        type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <div class="user-avatar bg-secondary rounded-circle d-flex align-items-center justify-content-center"
+                         style="width: 32px; height: 32px;">
+
+                        <i class="bi bi-person-fill text-white"></i>
+                    </div>
+                    <span class="main-font">Пользователь</span>
+
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </button>
+
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item menu-btn" href="#">Профиль</a></li>
+                    <li><a class="dropdown-item menu-btn" href="#">Выход</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-10 min-vh-100 p-4 d-flex flex-column justify-content-center push-up">
+            <div class="text-center mb-5">
+                <h1>Контакты</h1>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 d-flex justify-content-center">
+                    <div class="card" style="width: 72%;">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Имя</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Почта</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Сообщение</label>
+                                    <textarea class="form-control" id="message" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 d-flex justify-content-center">
+                    <div style="width: 72%;">
+                        <h4 class="mb-3">Наши контакты</h4>
+                        <p class="text-muted">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                            commodo consequat.
+                        </p>
+                        <p class="text-muted">
+                            While these feedback styles cannot be styled with CSS, you can still
+                            customize the feedback text through JavaScript.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
