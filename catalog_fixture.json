@@ -1,0 +1,133 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "category_name": "Хлеб",
+        "description": "Хлебобулочные изделия реализуемые в сети магазинов."
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "category_name": "Мясо",
+        "description": "Мясныее изделия реализуемые в сети магазинов: кусковые продукты, полуфабрикаты, готовые к употреблению изделия"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "category_name": "Напитки",
+        "description": "Реализуемые не алкогоьные напитки: соки, газированные, минеральные воды"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "category_name": "Выпечка",
+        "description": "Выпечка хлебобулочных изделий, производимая сетью магазинов."
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "category_name": "Овощи",
+        "description": "Реализуемый в сети магазинов перечень овощей."
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "product_name": "Стейк из индейки",
+        "description": "Производство компании \"Индихард\"",
+        "product_image": "",
+        "product_category": 2,
+        "price_per_unit": "319.56",
+        "created_at": "2026-10-05T09:03:39.161Z",
+        "updated_at": "2026-10-05T09:03:39.167Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "product_name": "Колбаса докторская",
+        "description": "Мясокомбинат Усть-Пермяковский",
+        "product_image": "",
+        "product_category": 2,
+        "price_per_unit": "200.50",
+        "created_at": "2026-10-05T09:05:21.828Z",
+        "updated_at": "2026-10-05T09:05:21.829Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "product_name": "Сосиски \"Батя могЕт\"",
+        "description": "Производство артель \"Мясоделоф\"",
+        "product_image": "",
+        "product_category": 2,
+        "price_per_unit": "99.99",
+        "created_at": "2026-10-05T09:09:38.650Z",
+        "updated_at": "2026-10-05T09:09:38.651Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "product_name": "Лаваш тонкий",
+        "description": "Для приготовления шаурмы",
+        "product_image": "",
+        "product_category": 1,
+        "price_per_unit": "34.50",
+        "created_at": "2026-10-05T09:11:15.242Z",
+        "updated_at": "2026-10-05T09:11:15.243Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "product_name": "хлеб Дарницкий",
+        "description": "Классика из детства",
+        "product_image": "",
+        "product_category": 1,
+        "price_per_unit": "49.85",
+        "created_at": "2026-10-05T09:12:23.754Z",
+        "updated_at": "2026-10-05T09:12:23.755Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "product_name": "Батон особый",
+        "description": "Как французский багет, только особый ",
+        "product_image": "",
+        "product_category": 1,
+        "price_per_unit": "67.22",
+        "created_at": "2026-10-05T09:14:09.290Z",
+        "updated_at": "2026-10-05T09:14:09.291Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+        "product_name": "Нано-пицца",
+        "description": "Кусочек Италии без вреда для фигуры",
+        "product_image": "",
+        "product_category": 4,
+        "price_per_unit": "55.39",
+        "created_at": "2026-10-05T09:22:14.898Z",
+        "updated_at": "2026-10-05T09:22:14.899Z"
+    }
+}
+]
