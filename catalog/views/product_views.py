@@ -8,7 +8,7 @@ from catalog.models import Product, Category
 class ProductCreateView(CreateView):
     model = Product
     fields = ['product_name', 'description', 'product_image', 'product_category', 'price_per_unit']
-    template_name = 'catalog/product/create.html'
+    template_name = 'catalog/product/create_product.html'
     success_url = reverse_lazy('catalog:product_list')
 
 
