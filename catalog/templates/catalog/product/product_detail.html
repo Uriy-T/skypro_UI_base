@@ -1,5 +1,7 @@
 {% extends 'main/main.html' %}
 
+{% block title %}{{product.product_name}}{% endblock %}
+
 {% block content %}
 
 <div class="container py-5">
@@ -26,7 +28,7 @@
 
                     <p class="text-muted mb-3">
                         Категория:
-                        <a href="{% url 'catalog:products_category' product.product_category.pk %}"
+                        <a href="{% url 'catalog:product_list' product.product_category_id %}"
                            class="text-decoration-none">
                             {{ product.product_category.category_name }}
                         </a>
@@ -41,7 +43,15 @@
                     </p>
 
                     <div class="mt-auto d-grid">
-                        <a href="{% url 'catalog:products_category' product.product_category.pk %}"
+                        <a href="{% url 'catalog:product_update' product.id %}"
+                           class="btn btn-lg btn-outline-primary mb-2">
+                            Редактировать продукт
+                        </a>
+                        <a href="{% url 'catalog:product_delete' product.id %}"
+                           class="btn btn-lg btn-outline-danger mb-2">
+                            Удалить продукт
+                        </a>
+                        <a href="{% url 'catalog:product_list' product.product_category_id %}"
                            class="btn btn-lg btn-outline-secondary">
                             Вернуться к категории
                         </a>
