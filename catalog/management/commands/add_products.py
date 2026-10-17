@@ -38,4 +38,3 @@ class Command(BaseCommand):
                                    price_per_unit=product['price_per_unit'])
 
             self.stdout.write(self.style.SUCCESS(f'Продукт {new_product.product_name} создан.'))
-
