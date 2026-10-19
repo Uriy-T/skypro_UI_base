@@ -14,6 +14,7 @@ class ArticleModel(models.Model):
     is_public = models.BooleanField(default=False, null=False, verbose_name='Опубликовано')
     view_count = models.IntegerField(default=0, null=False, validators=[MinValueValidator(0)],
                                      verbose_name='Количество просмотров')
+    is_reach_count = models.BooleanField(default=False, verbose_name='Значение достигнуто')
 
     def __str__(self):
         return f'Статья: "{self.title}"'
