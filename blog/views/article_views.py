@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.db.models import F
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse_lazy
@@ -17,6 +17,11 @@ class DetailArticleView(DetailView):
     template_name = 'blog/article/detail_article.html'
     context_object_name = 'article'
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        ArticleModel.objects.filter(pk=obj.pk).update(view_count=F('view_count') + 1)
+        obj.view_count = F('view_count') + 1
+        return obj
 
 class UpdateArticleView(UpdateView):
     model = ArticleModel
