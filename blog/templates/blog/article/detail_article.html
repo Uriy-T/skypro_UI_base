@@ -1,0 +1,54 @@
+{% extends 'main/main.html' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card box-shadow h-100">
+                <div class="card-header">
+                    <h1 class="my-0 font-weight-normal h3">{{article.title}}</h1>
+                </div>
+
+                <div class="card-body d-flex flex-column">
+                    <p class="text-start mb-4">
+                        {{article.content}}
+                    </p>
+
+                    <div class="mt-auto d-grid">
+                        <a href="{% url 'blog:article_update' article.pk %}"
+                           class="btn btn-lg btn-outline-primary mb-2">
+                            Редактировать статью
+                        </a>
+                        <a href="{% url 'blog:article_delete' article.pk %}"
+                           class="btn btn-lg btn-outline-danger mb-2">
+                            Удалить статью
+                        </a>
+                        <a href="{% url 'blog:article_list'%}"
+                           class="btn btn-lg btn-outline-secondary">
+                            Вернуться к статьям
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card box-shadow">
+                <div style="height: 400px; overflow: hidden;">
+
+                    <img src="{{ article.preview_image.url }}"
+                         class="w-100 h-100 object-fit-cover"
+                         alt="{{ article.preview_image }}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

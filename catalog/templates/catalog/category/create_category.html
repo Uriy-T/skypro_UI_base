@@ -1,0 +1,29 @@
+{% extends 'main/main.html' %}
+
+{% block title %} Создание категории {% endblock %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h3 class="display-4">Создать категорию</h3>
+</div>
+
+<div class="card-body w-25 mx-auto">
+    <form method="post" class="form-floating">
+
+        {% csrf_token %}
+        <div>
+            <label for="category_name" class="form-label">Название категории</label>
+            <input type="text" name="category_name" id="category_name" placeholder="Укажите название категории"
+                   class="form-control mb-3" required>
+        </div>
+        <div>
+            <label for="description" class="form-label">Описание категории</label>
+            <textarea name="description" id="description"
+                      placeholder="Укажите описание категории"
+                      class="form-control mb-3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+</div>
+{% endblock %}
