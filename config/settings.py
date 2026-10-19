@@ -135,8 +135,12 @@ MEDIA_ROOT = BASE_DIR/ 'media'
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}
+SEND_EMAIL = os.getenv('E_MAIL')
+
+# MAILERS = {
+#     'default': {
+#         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
+#     },
+# }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
