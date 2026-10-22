@@ -3,17 +3,20 @@
 {% block title %}Данные о категории{% endblock %}
 
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h3 class="display-4">Категория "{{category.category_name}}"</h3>
+<div class="container">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h3 class="display-4">Категория "{{category.category_name}}"</h3>
+    </div>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+        <p>Описание:
+            <br>{{category.description}}</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'catalog:category_update' category.pk %}" class="btn btn-info">Редактировать</a>
+        <a href="{% url 'catalog:product_list' category.pk %}" class="btn btn-secondary">Открыть список товаров</a>
+        <a href="{% url 'catalog:category_delete' category.pk %}" class="btn btn-danger">Удалить</a>
+    </div>
 </div>
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-    <p>Описание:
-        <br>{{category.description}}</p>
-</div>
-<div class="d-flex gap-2">
-    <a href="{% url 'catalog:category_update' category.pk %}" class="btn btn-info">Редактировать</a>
-    <a href="{% url 'catalog:product_list' category.pk %}" class="btn btn-secondary">Открыть список товаров</a>
-    <a href="{% url 'catalog:category_delete' category.pk %}" class="btn btn-danger">Удалить</a>
-</div>
+
 
 {% endblock%}
