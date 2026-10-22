@@ -10,16 +10,16 @@
     <script type="text/javascript" src="/static/js/bootstrap.min.js" defer></script>
 
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 {% include 'main/base_includes/header.html' %}
-<div class="container">
+<main class="flex-grow-1">
 
     {% block content %}{% endblock %}
 
-</div>
-<div class="container">
+</main>
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
 
     {% include 'main/base_includes/footer.html' %}
 
-</div>
+</footer>
 </body>

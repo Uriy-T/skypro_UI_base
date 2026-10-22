@@ -8,34 +8,7 @@
 <div class="card-body w-25 mx-auto" >
     <form method="post" action="" class="form-floating" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="product_name">Название продукта</label>
-            <input type="text" name="product_name" class="form-control" id="product_name"
-                   placeholder="Введите название продукта" required>
-        </div>
-        <div class="mb-3">
-            <label for="product_description">Описание продукта</label>
-            <textarea type="text" name="product_description" class="form-control" id="product_description">
-            </textarea>
-        </div>
-        <div class="mb-3">
-            <label for="product_image">Фото продукта</label>
-            <input type="file" name="product_image" id="product_image" accept=".png, .jpg, .jpeg, .webp">
-        </div>
-
-        <div class="mb-3">
-            <label for="product_categories">Категория продукта</label>
-            <select name="product_categories" id="product_categories" class="form-select" required>
-                {% for category in categories %}
-                <option value="{{ category.pk }}">{{ category.category_name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="price">Цена продукта</label>
-            <input type="text" name="price" class="form-control" id="price" placeholder="Укажите цену продукта"
-                   required>
-        </div>
+        {{ form.as_p }}
         <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Создать товар</button>
     </form>
 </div>
