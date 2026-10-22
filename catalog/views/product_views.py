@@ -3,23 +3,32 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse_lazy
 from catalog.models import Product, Category
+from catalog.forms import ProductForm
 
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ['product_name', 'description', 'product_image', 'product_category', 'price_per_unit']
+    form_class = ProductForm
     template_name = 'catalog/product/create_product.html'
-    success_url = reverse_lazy('catalog:product_list')
+
+    def form_valid(self, form):
+        self.category_id = form.cleaned_data['product_category'].pk
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('catalog:product_list', kwargs={'pk': self.category_id})
 
 
 class ProductDetailView(DetailView):
     model = Product
+    form_class = ProductForm
     template_name = 'catalog/product/product_detail.html'
     context_object_name = 'product'
 
+
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = ['product_name', 'description', 'product_image', 'product_category', 'price_per_unit']
+    form_class = ProductForm
     template_name = 'catalog/product/product_update.html'
 
     def get_context_data(self, **kwargs):
