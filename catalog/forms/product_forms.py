@@ -25,6 +25,12 @@ class ProductForm(forms.ModelForm):
                 raise ValidationError(f'"{word}" не может быть в составе значения поля "Название продукта".')
         return description
 
+    def clean_price_per_unit(self):
+        price = self.cleaned_data.get('price_per_unit')
+        if price < 0:
+            raise ValidationError('Цена продукта не может быть отрицательным числом')
+        return price
+
     def clean_product_image(self):
         image = self.cleaned_data.get('product_image')
         if not image:
