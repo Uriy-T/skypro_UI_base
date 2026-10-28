@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 import os
 
-from django.conf.global_settings import MEDIA_URL
+from django.conf.global_settings import MEDIA_URL, AUTH_USER_MODEL
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -145,3 +145,8 @@ SEND_EMAIL = os.getenv('E_MAIL')
 # }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# Custom User model
+AUTH_USER_MODEL = 'users.CustomBaseUser'
