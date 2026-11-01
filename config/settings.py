@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 import os
 
-from django.conf.global_settings import MEDIA_URL, AUTH_USER_MODEL
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -144,9 +144,19 @@ SEND_EMAIL = os.getenv('E_MAIL')
 #     },
 # }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv('MAIL_FROM')
+EMAIL_HOST_PASSWORD = os.getenv('MAIL_APP_PASS')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Custom User model
 AUTH_USER_MODEL = 'users.CustomBaseUser'
+
+# Redirect after success authentication
+LOGIN_REDIRECT_URL = reverse_lazy('catalog:category_list')
