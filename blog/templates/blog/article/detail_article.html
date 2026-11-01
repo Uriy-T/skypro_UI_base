@@ -19,6 +19,7 @@
                     </p>
 
                     <div class="mt-auto d-grid">
+                        {% if user.is_authenticated %}
                         <a href="{% url 'blog:article_update' article.pk %}"
                            class="btn btn-lg btn-outline-primary mb-2">
                             Редактировать статью
@@ -27,6 +28,8 @@
                            class="btn btn-lg btn-outline-danger mb-2">
                             Удалить статью
                         </a>
+                        {% endif %}
+
                         <a href="{% url 'blog:article_list'%}"
                            class="btn btn-lg btn-outline-secondary">
                             Вернуться к статьям
