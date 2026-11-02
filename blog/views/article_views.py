@@ -5,12 +5,13 @@ from django.urls import reverse_lazy
 from blog.models import ArticleModel
 from django.core.mail import send_mail
 from django.db.models import F
-import os
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-class CreateArticleView(CreateView):
+class CreateArticleView(LoginRequiredMixin, CreateView):
     model = ArticleModel
     fields = ['title', 'content', 'preview_image', 'is_public']
     template_name = 'blog/article/create_article.html'
@@ -42,7 +43,7 @@ class DetailArticleView(DetailView):
 
         return obj
 
-class UpdateArticleView(UpdateView):
+class UpdateArticleView(LoginRequiredMixin, UpdateView):
     model = ArticleModel
     fields = ['title', 'content', 'preview_image', 'is_public']
     template_name = 'blog/article/update_article.html'
@@ -52,7 +53,7 @@ class UpdateArticleView(UpdateView):
         return reverse_lazy('blog:article_detail', kwargs={'pk': self.object.pk})
 
 
-class DeleteArticleView(DeleteView):
+class DeleteArticleView(LoginRequiredMixin, DeleteView):
     model = ArticleModel
     template_name = 'blog/article/delete_article.html'
     context_object_name = 'article'

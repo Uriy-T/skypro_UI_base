@@ -1,0 +1,26 @@
+{% extends 'main/main.html' %}
+
+{% block title %}Редактирование профиля{% endblock %}
+
+{% block content %}
+<div class="card-body w-50 mx-auto">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <div class="mb-3">
+            <label class="form-label">Аватар</label>
+            {% if user.avatar %}
+                <div class="mb-2">
+                    <img src="{{ user.avatar.url }}" alt="Текущий аватар" style="max-width: 150px; max-height: 150px;">
+                </div>
+            {% else %}
+                <p class="text-muted small">Аватар не загружен.</p>
+            {% endif %}
+            {{ form.avatar }}
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Сохранить изменения</button>
+    </form>
+</div>
+{% endblock %}
