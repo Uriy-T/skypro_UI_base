@@ -2,15 +2,16 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from catalog.models import Product, Category
 from catalog.forms import ProductForm
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product/create_product.html'
+    permission_required = 'catalog.add_product'
 
     def form_valid(self, form):
         self.category_id = form.cleaned_data['product_category'].pk
@@ -27,10 +28,16 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product/product_update.html'
+    permission_required = 'catalog.change_product'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,9 +48,10 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return reverse_lazy('catalog:product_detail', kwargs={'pk': self.object.pk})
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product/delete_product.html'
+    permission_required = 'catalog.delete_product'
 
     def form_valid(self, form):
         self.category_id = self.object.product_category_id
