@@ -9,7 +9,7 @@ from configuration import RESTRICTED_WORDS, P_IMAGE_TYPES, P_SIZE_LIMIT
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['product_name', 'description', 'product_image', 'product_category', 'price_per_unit']
+        fields = ['product_name', 'description', 'product_image', 'product_category', 'price_per_unit', 'is_published']
 
     def clean_product_name(self):
         product_name = self.cleaned_data.get('product_name')
@@ -49,6 +49,8 @@ class ProductForm(forms.ModelForm):
 
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+
         super(ProductForm, self).__init__(*args, **kwargs)
 
         self.fields['product_name'].widget.attrs.update({
@@ -76,3 +78,13 @@ class ProductForm(forms.ModelForm):
             'placeholder': 'Укажите цену продукта',
             'required': 'required'
         })
+
+        self.fields['is_published'].widget.attrs.update({
+            'class': 'form-check-input'
+        })
+
+        if user and not user.has_perm('catalog.can_unpublish_product'):
+            self.fields['is_published'].widget = forms.HiddenInput()
+
+            if self.instance and self.instance.pk:
+                self.fields['is_published'].initial = self.instance.is_published
