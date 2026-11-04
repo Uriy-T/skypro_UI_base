@@ -13,6 +13,11 @@ class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     template_name = 'catalog/product/create_product.html'
     permission_required = 'catalog.add_product'
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         self.category_id = form.cleaned_data['product_category'].pk
         return super().form_valid(form)

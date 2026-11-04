@@ -16,7 +16,7 @@ class CreateArticleView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     fields = ['title', 'content', 'preview_image', 'is_public']
     template_name = 'blog/article/create_article.html'
     success_url = reverse_lazy('blog:article_list')
-    permission_required = 'can_add_article'
+    permission_required = 'blog.add_article'
 
 
 class DetailArticleView(DetailView):
@@ -49,7 +49,7 @@ class UpdateArticleView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     fields = ['title', 'content', 'preview_image', 'is_public']
     template_name = 'blog/article/update_article.html'
     context_object_name = 'article'
-    permission_required = 'can_change_article'
+    permission_required = 'blog.change_article'
 
     def get_success_url(self):
         return reverse_lazy('blog:article_detail', kwargs={'pk': self.object.pk})
@@ -60,7 +60,7 @@ class DeleteArticleView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     template_name = 'blog/article/delete_article.html'
     context_object_name = 'article'
     success_url = reverse_lazy('blog:article_list')
-    permission_required = 'can_delete_article'
+    permission_required = 'blog.delete_article'
 
 
 class ListArticleView(ListView):
