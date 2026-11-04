@@ -44,14 +44,18 @@
 
                     <div class="mt-auto d-grid">
                         {% if user.is_authenticated %}
+                        {% if perms.catalog.change_product %}
                         <a href="{% url 'catalog:product_update' product.id %}"
                            class="btn btn-lg btn-outline-primary mb-2">
                             Редактировать продукт
                         </a>
+                        {% endif%}
+                        {% if perms.catalog.delete_product%}
                         <a href="{% url 'catalog:product_delete' product.id %}"
                            class="btn btn-lg btn-outline-danger mb-2">
                             Удалить продукт
                         </a>
+                        {% endif %}
                         {% endif %}
                         <a href="{% url 'catalog:product_list' product.product_category_id %}"
                            class="btn btn-lg btn-outline-secondary">
