@@ -5,17 +5,18 @@ from django.urls import reverse_lazy
 from blog.models import ArticleModel
 from django.core.mail import send_mail
 from django.db.models import F
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-class CreateArticleView(LoginRequiredMixin, CreateView):
+class CreateArticleView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = ArticleModel
     fields = ['title', 'content', 'preview_image', 'is_public']
     template_name = 'blog/article/create_article.html'
     success_url = reverse_lazy('blog:article_list')
+    permission_required = 'can_add_article'
 
 
 class DetailArticleView(DetailView):
@@ -43,21 +44,23 @@ class DetailArticleView(DetailView):
 
         return obj
 
-class UpdateArticleView(LoginRequiredMixin, UpdateView):
+class UpdateArticleView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = ArticleModel
     fields = ['title', 'content', 'preview_image', 'is_public']
     template_name = 'blog/article/update_article.html'
     context_object_name = 'article'
+    permission_required = 'can_change_article'
 
     def get_success_url(self):
         return reverse_lazy('blog:article_detail', kwargs={'pk': self.object.pk})
 
 
-class DeleteArticleView(LoginRequiredMixin, DeleteView):
+class DeleteArticleView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = ArticleModel
     template_name = 'blog/article/delete_article.html'
     context_object_name = 'article'
     success_url = reverse_lazy('blog:article_list')
+    permission_required = 'can_delete_article'
 
 
 class ListArticleView(ListView):
