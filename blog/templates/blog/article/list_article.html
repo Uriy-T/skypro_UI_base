@@ -38,6 +38,7 @@
         {% endfor %}
 
         {% if user.is_authenticated %}
+        {% if perms.blog.add_article %}
         <div class="col-3 d-flex flex-column mb-4">
             <a href="{% url 'blog:article_create' %}" class="text-decoration-none d-flex flex-column flex-grow-1">
 
@@ -49,6 +50,7 @@
                 </div>
             </a>
         </div>
+        {% endif %}
         {% endif %}
 
     </div>
