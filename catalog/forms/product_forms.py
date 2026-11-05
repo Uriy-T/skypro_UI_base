@@ -83,6 +83,11 @@ class ProductForm(forms.ModelForm):
             'class': 'form-check-input'
         })
 
+        if user and user.has_perm('catalog.can_unpublish_product'):
+            for field_name, field in self.fields.items():
+                if field_name != 'is_published':
+                    field.disabled = True
+
         if user and not user.has_perm('catalog.can_unpublish_product'):
             self.fields['is_published'].widget = forms.HiddenInput()
 
