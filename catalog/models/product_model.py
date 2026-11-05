@@ -1,5 +1,6 @@
 from django.db import models
 from catalog.models import Category
+from users.models import CustomBaseUser
 
 class Product(models.Model):
     """
@@ -20,6 +21,12 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=False)
+    owner = models.ForeignKey(CustomBaseUser,
+                              null=True,
+                              blank=True,
+                              on_delete=models.SET_NULL,
+                              related_name='products',
+                              verbose_name='Владелец')
 
 
     def __str__(self):
