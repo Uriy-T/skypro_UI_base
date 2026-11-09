@@ -13,8 +13,12 @@
     </div>
     <div class="d-flex gap-2">
         {% if user.is_authenticated %}
+        {% if perms.catalog.change_category%}
         <a href="{% url 'catalog:category_update' category.pk %}" class="btn btn-info">Редактировать</a>
+        {% endif%}
+        {% if perms.catalog.delete_category%}
         <a href="{% url 'catalog:category_delete' category.pk %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
         {% endif %}
         <a href="{% url 'catalog:product_list' category.pk %}" class="btn btn-secondary">Открыть список товаров</a>
     </div>
