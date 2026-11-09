@@ -160,3 +160,13 @@ AUTH_USER_MODEL = 'users.CustomBaseUser'
 
 # Redirect after success authentication
 LOGIN_REDIRECT_URL = reverse_lazy('catalog:category_list')
+
+
+# Cache redis settings
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+    }
+}
