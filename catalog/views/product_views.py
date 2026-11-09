@@ -1,9 +1,11 @@
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
+from django.utils.decorators import method_decorator
 from catalog.models import Product, Category
 from catalog.forms import ProductForm
 
@@ -27,7 +29,8 @@ class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     def get_success_url(self):
         return reverse_lazy('catalog:product_list', kwargs={'pk': self.category_id})
 
-
+@method_decorator(vary_on_cookie, name='dispatch')
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     form_class = ProductForm
