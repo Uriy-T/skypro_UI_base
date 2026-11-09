@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from django.utils.decorators import method_decorator
+from django.core.cache import cache
 from catalog.models import Product, Category
 from catalog.forms import ProductForm
 
@@ -30,7 +31,7 @@ class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
         return reverse_lazy('catalog:product_list', kwargs={'pk': self.category_id})
 
 @method_decorator(vary_on_cookie, name='dispatch')
-@method_decorator(cache_page(60 * 15), name='dispatch')
+@method_decorator(cache_page(60 * 5), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     form_class = ProductForm
@@ -84,7 +85,14 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         category_id = self.kwargs['pk']
-        return Product.objects.filter(product_category_id=category_id)
+        cache_key = f'products_queryset_category_{category_id}'
+        queryset = cache.get(cache_key)
+
+        if not queryset:
+            queryset = list(Product.objects.filter(product_category_id=category_id))
+            cache.set(cache_key, queryset, 60 * 5)
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
