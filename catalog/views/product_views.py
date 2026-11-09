@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.core.cache import cache
 from catalog.models import Product, Category
 from catalog.forms import ProductForm
+from catalog.services import ProductService
 
 
 class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -89,7 +90,7 @@ class ProductListView(ListView):
         queryset = cache.get(cache_key)
 
         if not queryset:
-            queryset = list(Product.objects.filter(product_category_id=category_id))
+            queryset = ProductService.get_products_by_category(category_id)
             cache.set(cache_key, queryset, 60 * 5)
 
         return queryset
