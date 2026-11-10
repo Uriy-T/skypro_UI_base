@@ -1,0 +1,29 @@
+{% extends 'main/main.html' %}
+
+{% block title %} Создание категории {% endblock %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h3 class="display-4">Редактировать категорию "{{category.category_name}}"</h3>
+</div>
+
+<div class="card-body w-25 mx-auto">
+    <form method="post" class="form-floating">
+
+        {% csrf_token %}
+        <div>
+            <label for="category_name" class="form-label">Название категории</label>
+            <input type="text" name="category_name" id="category_name" value="{{category.category_name}}"
+                   class="form-control mb-3" required>
+        </div>
+        <div>
+            <label for="description" class="form-label">Описание категории</label>
+            <textarea name="description" id="description"
+                      class="form-control mb-3">{{category.description}}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="{% url 'catalog:category_detail' category.pk %}" class="btn btn-danger">Отмена</a>
+    </form>
+</div>
+{% endblock %}
